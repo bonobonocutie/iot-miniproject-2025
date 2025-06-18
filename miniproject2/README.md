@@ -82,6 +82,8 @@ ERD
 4. WPF 애니메이션 기능으로 컨베이어벨트 구현
 
 
+    https://github.com/user-attachments/assets/39707bdd-128e-4516-bd21-5dbe5abfc7dc
+
 
 ##### MQTT Subscriber
 - WPF 과목에서 사용했던 MQTT Subscriber 그대로 사용
