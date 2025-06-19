@@ -4,6 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
+using WpfIoTSimulatorApp.ViewModels;
 
 namespace WpfIoTSimulatorApp.Views
 {
@@ -17,17 +18,9 @@ namespace WpfIoTSimulatorApp.Views
             InitializeComponent();
         }
 
-        //Timer timer = new Timer();
-        Stopwatch sw = new Stopwatch();
-
-
-        private void BtnTest_Click(object sender, System.Windows.RoutedEventArgs e)
-        {
-            StartHmiAni(); // Hmi 애니메이션 동작
-        }
-
-        // WPF 상의 객체 애니메이션 추가
-        private void StartHmiAni()
+        // 뷰상에 있는 이벤트 핸들러를 전부 제거
+        // WPF 상의 객체 애니메이션 추가. 애니메이션은 디자이너 역할(View)
+        public void StartHmiAni()
         {
             Product.Fill = new SolidColorBrush(Colors.Gray); // 제품을 회색으로 칠하기
 
@@ -55,12 +48,7 @@ namespace WpfIoTSimulatorApp.Views
 
         }
 
-        private void BtnCheck_Click(object sender, System.Windows.RoutedEventArgs e)
-        {
-            StartSensorCheck();
-        }
-
-        private void StartSensorCheck()
+        public void StartSensorCheck()
         {
             Dispatcher.Invoke(DispatcherPriority.Normal, new Action(delegate
             {

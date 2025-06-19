@@ -85,10 +85,15 @@ ERD
     https://github.com/user-attachments/assets/39707bdd-128e-4516-bd21-5dbe5abfc7dc
 
 
+5. 선별결과 MQTT로 전달 기능 추가
+
 ##### MQTT Subscriber
 - WPF 과목에서 사용했던 MQTT Subscriber 그대로 사용
 - WpfMqttSubApp 프로젝트 가져오기
 - SmartHome 작업했던 부분 수정 DB 저장부분 변경
+
+1. 서비스 실행 중 확인
+    - 콘솔에서 `telnet ip주소 포트번호` 화면이 전환되면 접속성공
 
 ##### WPF 공정관리 앱 개발
 - 
