@@ -116,10 +116,10 @@ public partial class IotDbContext : DbContext
             entity.Property(e => e.CodeDesc)
                 .HasComment("코드설명")
                 .HasColumnName("codeDesc");
-            entity.Property(e => e.CodeNmae)
+            entity.Property(e => e.CodeName)
                 .HasMaxLength(100)
                 .HasComment("코드명")
-                .HasColumnName("codeNmae");
+                .HasColumnName("codeName");
             entity.Property(e => e.ModDt)
                 .HasColumnType("datetime")
                 .HasColumnName("modDt");
