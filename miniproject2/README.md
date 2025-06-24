@@ -99,6 +99,9 @@ ERD
 2. MainViewModel.cs 현재 Publish에 맞게 수정
     - BrokerIP, Topic...
 3. EntityFramework 사용, Database 테이블 모델화(DBFirst)
+    ```shell
+    PM> Scaffold-DbContext "Server=localhost;Database=miniproject;Uid=root;Password=*****;Charset=utf8" Pomelo.EntityFrameworkCore.MySql -OutputDir Models -Force -Context IoTDbContext
+    ```
 4. config.json 파일, 설정파일 로드 클래스 작업
 5. 구독 결과  
     <img src="../image/mp04.png" width="600">
@@ -114,6 +117,18 @@ ERD
 5. SettingView 화면 UI 구현
 6. SetttngViewModel과 연동 작업
 7. Model DB 테이블 클래스 가져오기
+8. Setting 관련, DB연동 조회/입력/수정/삭제 기능 구현
+
+9. ScheduleView, ScheduleViewModel 초기 구현
+    - SettingView.xaml 복사 후 이름 변경, 클래스명 변경
+    - SettingViewModel.cs 복사 후 이름 변경, 클래스명 변경
+
+10. ScheduleView 데이터그리드, 입력양식 수정
+
+11. EntityFramework용 패키지 설치
+    - Microsoft.EntityFrameworkCore
+    - Microsoft.EntityFrameworkCore.Tools
+    - Pomelo.EntityFrameworkCore.MySql
 
 #### 파이썬 AI + ASP.NET 연동
 - 참조소스

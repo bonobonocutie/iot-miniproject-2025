@@ -10,6 +10,7 @@
         mc:Ignorable="d"
         Title="MRP 공정관리" Height="450" Width="800" ResizeMode="NoResize"
         MinWidth="471" MinHeight="290"
+        ShowCloseButton="False"
         Dialog:DialogParticipation.Register="{Binding}" Closing="MetroWindow_Closing">
     <mah:MetroWindow.IconTemplate>
         <DataTemplate>
@@ -43,7 +44,8 @@
                     </Button.ContentTemplate>
                 </Button>
 
-                <Button Content="공정계획" FontSize="12" Background="DodgerBlue" Margin="5">
+                <Button Content="공정계획" FontSize="12" Background="DodgerBlue" Margin="5"
+                        Command="{Binding SetScheduleCommand}">
                     <Button.ContentTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
