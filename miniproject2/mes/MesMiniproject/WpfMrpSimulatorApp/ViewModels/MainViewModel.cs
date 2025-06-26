@@ -1,16 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MahApps.Metro.Controls.Dialogs;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using WpfMrpSimulatorApp.Helpers;
-using WpfMrpSimulatorApp.Models;
 using WpfMrpSimulatorApp.Views;
 
 namespace WpfMrpSimulatorApp.ViewModels
@@ -77,6 +70,21 @@ namespace WpfMrpSimulatorApp.ViewModels
             {
                 DataContext = viewModel,
             };
+
+            CurrentView = view;
+        }
+
+        [RelayCommand]
+        public void GetMonitoring()
+        {
+            var viewModel = new MonitoringViewModel(Common.DIALOGCORDINATOR);
+            var view = new MonitoringView
+            {
+                DataContext = viewModel,
+            };
+
+            viewModel.StartHmiRequested += view.StartHmiAni; // 애니메이션 동작 연결
+            viewModel.StartSensorCheckRequested += view.StartSensorCheck; // 센서동작 애니메이션 연결
 
             CurrentView = view;
         }

@@ -23,7 +23,8 @@ namespace WpfIoTSimulatorApp.ViewModels
 
         private IMqttClient mqttClient;
         private string brokeHost;
-        private string mqttTopic;
+        private string mqttPubTopic;
+        private string mqttSubTopic;
         private string clientId;
 
         private int logNum; // 로그메세지 순번
@@ -38,8 +39,10 @@ namespace WpfIoTSimulatorApp.ViewModels
 
             // MQTT용 초기화
             brokeHost = "210.119.12.73"; // 본인 PC 아이피
-            clientId = "IOT01";
-            mqttTopic = "pknu/sf73/data"; // 스마트팩토리 토픽
+            clientId = "IOT01"; // IoT 장비번호
+            mqttPubTopic = "pknu/sf73/data"; // 스마트팩토리 토픽
+            mqttSubTopic = "pknu/sf73/control";
+
             logNum = 1; // 로그번호를 1부터 시작
 
             // MQTT 클라이언트 생성 및 초기화
@@ -96,7 +99,7 @@ namespace WpfIoTSimulatorApp.ViewModels
 
             // 테스트 메세지
             var message = new MqttApplicationMessageBuilder()
-                            .WithTopic(mqttTopic)
+                            .WithTopic(mqttPubTopic)
                             .WithPayload("Hello From IoT Simulator!")
                             .WithQualityOfServiceLevel(MQTTnet.Protocol.MqttQualityOfServiceLevel.ExactlyOnce)
                             .Build();
@@ -104,6 +107,15 @@ namespace WpfIoTSimulatorApp.ViewModels
             // MQTT 브로커로 전송!
             await mqttClient.PublishAsync(message);
             LogText = "MQTT 브로커에 초기메세지 전송!";
+
+            await mqttClient.SubscribeAsync(new MqttTopicFilterBuilder().WithTopic(mqttSubTopic).Build());
+            mqttClient.ApplicationMessageReceivedAsync += MqttMessageReceivedAsync;
+
+        }
+
+        private Task MqttMessageReceivedAsync(MqttApplicationMessageReceivedEventArgs args)
+        {
+            return Task.CompletedTask;
         }
 
         #endregion
@@ -126,7 +138,7 @@ namespace WpfIoTSimulatorApp.ViewModels
         [RelayCommand]
         public void Check()
         {
-            StartSensorCheckRequested?.Invoke();
+            StartSensorCheckRequested?.Invoke(); // 센서 애니메이션 동작 요청
 
             // 양품불량품 판단
             Random rand = new();
@@ -165,7 +177,7 @@ namespace WpfIoTSimulatorApp.ViewModels
             // 일반 객체 데이터를 json으로 변경 -> 직렬화(Serialization)
             var jsonPayload = JsonConvert.SerializeObject(payload, Formatting.Indented);
             var message = new MqttApplicationMessageBuilder()
-                            .WithTopic(mqttTopic)
+                            .WithTopic(mqttPubTopic)
                             .WithPayload(jsonPayload)
                             .WithQualityOfServiceLevel(MQTTnet.Protocol.MqttQualityOfServiceLevel.ExactlyOnce)
                             .Build();
